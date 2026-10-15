@@ -1,0 +1,17 @@
+# ModelSim / QuestaSim generated files
+work/
+transcript
+*.wlf
+*.mpf
+*.mti
+*.vstf
+
+# Simulation waveform / dump files
+*.vcd
+
+# Quartus-generated files that may accompany simulations
+*.qws
+*.qdb
+*.qpg
+*.qtl
+*_assignment_defaults.qdf

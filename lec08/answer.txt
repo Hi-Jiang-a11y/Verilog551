@@ -1,0 +1,8 @@
+The code is not correct because d is missing from the sensitivity list. 
+When clk is high, a change in d should update q, but always @(clk) will 
+not trigger when only d changes.
+
+always_ff expresses the intent to describe flip-flop behavior and allows 
+synthesis tools to check that the code follows flip-flop rules. But the 
+actual hardware is determined by the behavior described in the block 
+@(posedge clk).
