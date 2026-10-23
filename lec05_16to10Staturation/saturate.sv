@@ -1,4 +1,4 @@
-module DUT (
+module saturate (
     input  [15:0] unsigned_err,
     output reg [9:0]  unsigned_err_sat,
     input  [15:0] signed_err,
@@ -7,14 +7,14 @@ module DUT (
     output reg [6:0]  signed_D_diff_sat
 );
 
-always@(*) begin
+always_comb begin
     if (| unsigned_err[15:10])
         unsigned_err_sat = {10{1'b1}};
     else
         unsigned_err_sat = unsigned_err[9:0];
 end
 
-always@(*) begin
+always_comb begin
     if (signed_err[15]==1'b0) begin
         if (| signed_err[14:9])
             signed_err_sat = {1'b0, {9{1'b1}}};
@@ -28,7 +28,7 @@ always@(*) begin
     end
 end
 
-always@(*) begin
+always_comb begin
     if (signed_D_diff[9]==1'b0) begin
         if (| signed_D_diff[8:6])
             signed_D_diff_sat = {1'b0, {6{1'b1}}};
