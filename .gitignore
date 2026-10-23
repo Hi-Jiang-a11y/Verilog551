@@ -14,4 +14,12 @@ transcript
 *.qdb
 *.qpg
 *.qtl
+*.qsf
+*.qpf
 *_assignment_defaults.qdf
+
+# drawio files
+*.drawio.bkp
+
+# pdf
+*.pdf
