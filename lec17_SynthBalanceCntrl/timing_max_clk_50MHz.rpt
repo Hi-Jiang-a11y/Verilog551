@@ -1,0 +1,334 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nworst 3
+        -max_paths 3
+Design : balance_cntrl
+Version: Y-2026.03
+Date   : Fri Oct 30 13:01:09 2026
+****************************************
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: ptch[10] (input port clocked by clk)
+  Endpoint: too_fast (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  balance_cntrl      16000                 saed32rvt_tt0p85v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    0.30       0.30 r
+  ptch[10] (in)                                           0.00       0.30 r
+  U408/Y (AND3X1_RVT)                                     0.07       0.38 r
+  U407/Y (NAND4X0_RVT)                                    0.07       0.44 f
+  U785/Y (NAND2X0_RVT)                                    0.12       0.56 r
+  U366/Y (AO21X1_RVT)                                     0.14       0.70 r
+  U360/Y (AND2X1_RVT)                                     0.08       0.78 r
+  u_pid/mult_26/S1_4_0/CO (FADDX1_RVT)                    0.13       0.91 r
+  u_pid/mult_26/S1_5_0/CO (FADDX1_RVT)                    0.13       1.05 r
+  u_pid/mult_26/S1_6_0/CO (FADDX1_RVT)                    0.13       1.18 r
+  u_pid/mult_26/S1_7_0/CO (FADDX1_RVT)                    0.13       1.32 r
+  u_pid/mult_26/S1_8_0/CO (FADDX1_RVT)                    0.13       1.44 r
+  U380/Y (NAND2X0_RVT)                                    0.07       1.51 f
+  U379/Y (OA21X1_RVT)                                     0.10       1.62 f
+  U749/Y (XNOR2X1_RVT)                                    0.14       1.76 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_9/CO (FADDX1_RVT)
+                                                          0.13       1.89 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_10/CO (FADDX1_RVT)
+                                                          0.12       2.01 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_11/CO (FADDX1_RVT)
+                                                          0.12       2.12 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_12/CO (FADDX1_RVT)
+                                                          0.12       2.24 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_13/CO (FADDX1_RVT)
+                                                          0.12       2.35 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_14/CO (FADDX1_RVT)
+                                                          0.12       2.47 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_15/S (FADDX1_RVT)
+                                                          0.18       2.66 f
+  U690/Y (INVX1_RVT)                                      0.09       2.74 r
+  U688/Y (AND2X1_RVT)                                     0.11       2.85 r
+  U284/Y (AO21X1_RVT)                                     0.11       2.96 r
+  U265/Y (NAND2X0_RVT)                                    0.07       3.03 f
+  U784/Y (XNOR2X1_RVT)                                    0.14       3.17 f
+  u_segway_math/mult_19/S2_2_5/S (FADDX1_RVT)             0.17       3.34 r
+  u_segway_math/mult_19/S2_3_4/CO (FADDX1_RVT)            0.12       3.46 r
+  u_segway_math/mult_19/S2_4_4/S (FADDX1_RVT)             0.18       3.64 f
+  u_segway_math/mult_19/S2_5_3/S (FADDX1_RVT)             0.17       3.81 r
+  u_segway_math/mult_19/S2_6_2/CO (FADDX1_RVT)            0.12       3.93 r
+  u_segway_math/mult_19/S2_7_2/CO (FADDX1_RVT)            0.13       4.06 r
+  u_segway_math/mult_19/S2_8_2/CO (FADDX1_RVT)            0.13       4.20 r
+  u_segway_math/mult_19/S2_9_2/CO (FADDX1_RVT)            0.13       4.33 r
+  u_segway_math/mult_19/S2_10_2/S (FADDX1_RVT)            0.18       4.51 f
+  u_segway_math/mult_19/S4_1/S (FADDX1_RVT)               0.18       4.69 r
+  U748/Y (XOR2X1_RVT)                                     0.15       4.83 f
+  U658/Y (AND3X1_RVT)                                     0.09       4.93 f
+  U652/Y (AOI21X1_RVT)                                    0.11       5.04 r
+  u_segway_math/add_43/U1_4/CO (FADDX1_RVT)               0.15       5.19 r
+  u_segway_math/add_43/U1_5/CO (FADDX1_RVT)               0.12       5.30 r
+  u_segway_math/add_43/U1_6/CO (FADDX1_RVT)               0.12       5.42 r
+  u_segway_math/add_43/U1_7/CO (FADDX1_RVT)               0.12       5.54 r
+  u_segway_math/add_43/U1_8/CO (FADDX1_RVT)               0.12       5.65 r
+  u_segway_math/add_43/U1_9/CO (FADDX1_RVT)               0.12       5.77 r
+  u_segway_math/add_43/U1_10/CO (FADDX1_RVT)              0.12       5.88 r
+  u_segway_math/add_43/U1_11/CO (FADDX1_RVT)              0.12       6.00 r
+  u_segway_math/add_43/U1_12/S (FADDX1_RVT)               0.16       6.16 f
+  U613/Y (AO21X1_RVT)                                     0.11       6.26 f
+  U673/Y (INVX1_RVT)                                      0.07       6.33 r
+  U703/Y (XNOR2X1_RVT)                                    0.12       6.45 f
+  U608/Y (AO21X1_RVT)                                     0.08       6.53 f
+  U607/Y (AO221X1_RVT)                                    0.11       6.64 f
+  U601/Y (AOI21X1_RVT)                                    0.11       6.75 r
+  U600/Y (AND4X1_RVT)                                     0.09       6.83 r
+  U599/Y (OA22X1_RVT)                                     0.08       6.91 r
+  U597/Y (NAND4X0_RVT)                                    0.09       7.00 f
+  U596/Y (AND3X1_RVT)                                     0.11       7.12 f
+  U581/Y (AO22X1_RVT)                                     0.09       7.21 f
+  U578/Y (AO21X1_RVT)                                     0.06       7.27 f
+  U576/Y (AO222X1_RVT)                                    0.10       7.37 f
+  U704/Y (INVX1_RVT)                                      0.05       7.42 r
+  U575/Y (OR2X1_RVT)                                      0.06       7.48 r
+  U758/Y (NAND2X0_RVT)                                    0.10       7.59 f
+  U548/Y (OA22X1_RVT)                                     0.14       7.73 f
+  U706/Y (OAI221X1_RVT)                                   0.11       7.84 r
+  U547/Y (AO221X1_RVT)                                    0.07       7.91 r
+  U432/Y (NOR3X0_RVT)                                     0.10       8.01 f
+  U431/Y (NAND4X0_RVT)                                    0.05       8.06 r
+  U430/Y (NAND4X0_RVT)                                    0.06       8.12 f
+  U426/Y (NAND2X0_RVT)                                    0.05       8.17 r
+  too_fast (out)                                          0.00       8.17 r
+  data arrival time                                                  8.17
+
+  clock clk (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.00      20.00
+  output external delay                                  -0.75      19.25
+  data required time                                                19.25
+  --------------------------------------------------------------------------
+  data required time                                                19.25
+  data arrival time                                                 -8.17
+  --------------------------------------------------------------------------
+  slack (MET)                                                       11.08
+
+
+  Startpoint: ptch[10] (input port clocked by clk)
+  Endpoint: too_fast (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  balance_cntrl      16000                 saed32rvt_tt0p85v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    0.30       0.30 r
+  ptch[10] (in)                                           0.00       0.30 r
+  U408/Y (AND3X1_RVT)                                     0.07       0.38 r
+  U407/Y (NAND4X0_RVT)                                    0.07       0.44 f
+  U785/Y (NAND2X0_RVT)                                    0.12       0.56 r
+  U366/Y (AO21X1_RVT)                                     0.14       0.70 r
+  U360/Y (AND2X1_RVT)                                     0.08       0.78 r
+  u_pid/mult_26/S1_4_0/CO (FADDX1_RVT)                    0.13       0.91 r
+  u_pid/mult_26/S1_5_0/CO (FADDX1_RVT)                    0.13       1.05 r
+  u_pid/mult_26/S1_6_0/CO (FADDX1_RVT)                    0.13       1.18 r
+  u_pid/mult_26/S1_7_0/CO (FADDX1_RVT)                    0.13       1.32 r
+  u_pid/mult_26/S1_8_0/CO (FADDX1_RVT)                    0.13       1.44 r
+  U380/Y (NAND2X0_RVT)                                    0.07       1.51 f
+  U379/Y (OA21X1_RVT)                                     0.10       1.62 f
+  U749/Y (XNOR2X1_RVT)                                    0.14       1.76 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_9/CO (FADDX1_RVT)
+                                                          0.13       1.89 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_10/CO (FADDX1_RVT)
+                                                          0.12       2.01 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_11/CO (FADDX1_RVT)
+                                                          0.12       2.12 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_12/CO (FADDX1_RVT)
+                                                          0.12       2.24 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_13/CO (FADDX1_RVT)
+                                                          0.12       2.35 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_14/CO (FADDX1_RVT)
+                                                          0.12       2.47 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_15/S (FADDX1_RVT)
+                                                          0.18       2.66 f
+  U690/Y (INVX1_RVT)                                      0.09       2.74 r
+  U688/Y (AND2X1_RVT)                                     0.11       2.85 r
+  U284/Y (AO21X1_RVT)                                     0.11       2.96 r
+  U265/Y (NAND2X0_RVT)                                    0.07       3.03 f
+  U784/Y (XNOR2X1_RVT)                                    0.14       3.17 f
+  u_segway_math/mult_19/S2_2_5/S (FADDX1_RVT)             0.17       3.34 r
+  u_segway_math/mult_19/S2_3_4/CO (FADDX1_RVT)            0.12       3.46 r
+  u_segway_math/mult_19/S2_4_4/CO (FADDX1_RVT)            0.13       3.59 r
+  u_segway_math/mult_19/S2_5_4/S (FADDX1_RVT)             0.18       3.77 f
+  u_segway_math/mult_19/S2_6_3/S (FADDX1_RVT)             0.17       3.94 r
+  u_segway_math/mult_19/S2_7_2/CO (FADDX1_RVT)            0.12       4.06 r
+  u_segway_math/mult_19/S2_8_2/CO (FADDX1_RVT)            0.13       4.20 r
+  u_segway_math/mult_19/S2_9_2/CO (FADDX1_RVT)            0.13       4.33 r
+  u_segway_math/mult_19/S2_10_2/S (FADDX1_RVT)            0.18       4.51 f
+  u_segway_math/mult_19/S4_1/S (FADDX1_RVT)               0.18       4.69 r
+  U748/Y (XOR2X1_RVT)                                     0.15       4.83 f
+  U658/Y (AND3X1_RVT)                                     0.09       4.93 f
+  U652/Y (AOI21X1_RVT)                                    0.11       5.04 r
+  u_segway_math/add_43/U1_4/CO (FADDX1_RVT)               0.15       5.19 r
+  u_segway_math/add_43/U1_5/CO (FADDX1_RVT)               0.12       5.30 r
+  u_segway_math/add_43/U1_6/CO (FADDX1_RVT)               0.12       5.42 r
+  u_segway_math/add_43/U1_7/CO (FADDX1_RVT)               0.12       5.54 r
+  u_segway_math/add_43/U1_8/CO (FADDX1_RVT)               0.12       5.65 r
+  u_segway_math/add_43/U1_9/CO (FADDX1_RVT)               0.12       5.77 r
+  u_segway_math/add_43/U1_10/CO (FADDX1_RVT)              0.12       5.88 r
+  u_segway_math/add_43/U1_11/CO (FADDX1_RVT)              0.12       6.00 r
+  u_segway_math/add_43/U1_12/S (FADDX1_RVT)               0.16       6.16 f
+  U613/Y (AO21X1_RVT)                                     0.11       6.26 f
+  U673/Y (INVX1_RVT)                                      0.07       6.33 r
+  U703/Y (XNOR2X1_RVT)                                    0.12       6.45 f
+  U608/Y (AO21X1_RVT)                                     0.08       6.53 f
+  U607/Y (AO221X1_RVT)                                    0.11       6.64 f
+  U601/Y (AOI21X1_RVT)                                    0.11       6.75 r
+  U600/Y (AND4X1_RVT)                                     0.09       6.83 r
+  U599/Y (OA22X1_RVT)                                     0.08       6.91 r
+  U597/Y (NAND4X0_RVT)                                    0.09       7.00 f
+  U596/Y (AND3X1_RVT)                                     0.11       7.12 f
+  U581/Y (AO22X1_RVT)                                     0.09       7.21 f
+  U578/Y (AO21X1_RVT)                                     0.06       7.27 f
+  U576/Y (AO222X1_RVT)                                    0.10       7.37 f
+  U704/Y (INVX1_RVT)                                      0.05       7.42 r
+  U575/Y (OR2X1_RVT)                                      0.06       7.48 r
+  U758/Y (NAND2X0_RVT)                                    0.10       7.59 f
+  U548/Y (OA22X1_RVT)                                     0.14       7.73 f
+  U706/Y (OAI221X1_RVT)                                   0.11       7.84 r
+  U547/Y (AO221X1_RVT)                                    0.07       7.91 r
+  U432/Y (NOR3X0_RVT)                                     0.10       8.01 f
+  U431/Y (NAND4X0_RVT)                                    0.05       8.06 r
+  U430/Y (NAND4X0_RVT)                                    0.06       8.12 f
+  U426/Y (NAND2X0_RVT)                                    0.05       8.17 r
+  too_fast (out)                                          0.00       8.17 r
+  data arrival time                                                  8.17
+
+  clock clk (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.00      20.00
+  output external delay                                  -0.75      19.25
+  data required time                                                19.25
+  --------------------------------------------------------------------------
+  data required time                                                19.25
+  data arrival time                                                 -8.17
+  --------------------------------------------------------------------------
+  slack (MET)                                                       11.08
+
+
+  Startpoint: ptch[10] (input port clocked by clk)
+  Endpoint: too_fast (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  balance_cntrl      16000                 saed32rvt_tt0p85v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    0.30       0.30 r
+  ptch[10] (in)                                           0.00       0.30 r
+  U408/Y (AND3X1_RVT)                                     0.07       0.38 r
+  U407/Y (NAND4X0_RVT)                                    0.07       0.44 f
+  U785/Y (NAND2X0_RVT)                                    0.12       0.56 r
+  U366/Y (AO21X1_RVT)                                     0.14       0.70 r
+  U360/Y (AND2X1_RVT)                                     0.08       0.78 r
+  u_pid/mult_26/S1_4_0/CO (FADDX1_RVT)                    0.13       0.91 r
+  u_pid/mult_26/S1_5_0/CO (FADDX1_RVT)                    0.13       1.05 r
+  u_pid/mult_26/S1_6_0/CO (FADDX1_RVT)                    0.13       1.18 r
+  u_pid/mult_26/S1_7_0/CO (FADDX1_RVT)                    0.13       1.32 r
+  u_pid/mult_26/S1_8_0/CO (FADDX1_RVT)                    0.13       1.44 r
+  U380/Y (NAND2X0_RVT)                                    0.07       1.51 f
+  U379/Y (OA21X1_RVT)                                     0.10       1.62 f
+  U749/Y (XNOR2X1_RVT)                                    0.14       1.76 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_9/CO (FADDX1_RVT)
+                                                          0.13       1.89 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_10/CO (FADDX1_RVT)
+                                                          0.12       2.01 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_11/CO (FADDX1_RVT)
+                                                          0.12       2.12 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_12/CO (FADDX1_RVT)
+                                                          0.12       2.24 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_13/CO (FADDX1_RVT)
+                                                          0.12       2.35 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_14/CO (FADDX1_RVT)
+                                                          0.12       2.47 r
+  u_pid/add_0_root_sub_1_root_add_99_2/U1_15/S (FADDX1_RVT)
+                                                          0.18       2.66 f
+  U690/Y (INVX1_RVT)                                      0.09       2.74 r
+  U688/Y (AND2X1_RVT)                                     0.11       2.85 r
+  U284/Y (AO21X1_RVT)                                     0.11       2.96 r
+  U265/Y (NAND2X0_RVT)                                    0.07       3.03 f
+  U784/Y (XNOR2X1_RVT)                                    0.14       3.17 f
+  u_segway_math/mult_19/S2_2_5/S (FADDX1_RVT)             0.17       3.34 r
+  u_segway_math/mult_19/S2_3_4/CO (FADDX1_RVT)            0.12       3.46 r
+  u_segway_math/mult_19/S2_4_4/CO (FADDX1_RVT)            0.13       3.59 r
+  u_segway_math/mult_19/S2_5_4/CO (FADDX1_RVT)            0.13       3.73 r
+  u_segway_math/mult_19/S2_6_4/S (FADDX1_RVT)             0.18       3.91 f
+  u_segway_math/mult_19/S2_7_3/S (FADDX1_RVT)             0.17       4.08 r
+  u_segway_math/mult_19/S2_8_2/CO (FADDX1_RVT)            0.12       4.20 r
+  u_segway_math/mult_19/S2_9_2/CO (FADDX1_RVT)            0.13       4.33 r
+  u_segway_math/mult_19/S2_10_2/S (FADDX1_RVT)            0.18       4.51 f
+  u_segway_math/mult_19/S4_1/S (FADDX1_RVT)               0.18       4.69 r
+  U748/Y (XOR2X1_RVT)                                     0.15       4.83 f
+  U658/Y (AND3X1_RVT)                                     0.09       4.93 f
+  U652/Y (AOI21X1_RVT)                                    0.11       5.04 r
+  u_segway_math/add_43/U1_4/CO (FADDX1_RVT)               0.15       5.19 r
+  u_segway_math/add_43/U1_5/CO (FADDX1_RVT)               0.12       5.30 r
+  u_segway_math/add_43/U1_6/CO (FADDX1_RVT)               0.12       5.42 r
+  u_segway_math/add_43/U1_7/CO (FADDX1_RVT)               0.12       5.54 r
+  u_segway_math/add_43/U1_8/CO (FADDX1_RVT)               0.12       5.65 r
+  u_segway_math/add_43/U1_9/CO (FADDX1_RVT)               0.12       5.77 r
+  u_segway_math/add_43/U1_10/CO (FADDX1_RVT)              0.12       5.88 r
+  u_segway_math/add_43/U1_11/CO (FADDX1_RVT)              0.12       6.00 r
+  u_segway_math/add_43/U1_12/S (FADDX1_RVT)               0.16       6.16 f
+  U613/Y (AO21X1_RVT)                                     0.11       6.26 f
+  U673/Y (INVX1_RVT)                                      0.07       6.33 r
+  U703/Y (XNOR2X1_RVT)                                    0.12       6.45 f
+  U608/Y (AO21X1_RVT)                                     0.08       6.53 f
+  U607/Y (AO221X1_RVT)                                    0.11       6.64 f
+  U601/Y (AOI21X1_RVT)                                    0.11       6.75 r
+  U600/Y (AND4X1_RVT)                                     0.09       6.83 r
+  U599/Y (OA22X1_RVT)                                     0.08       6.91 r
+  U597/Y (NAND4X0_RVT)                                    0.09       7.00 f
+  U596/Y (AND3X1_RVT)                                     0.11       7.12 f
+  U581/Y (AO22X1_RVT)                                     0.09       7.21 f
+  U578/Y (AO21X1_RVT)                                     0.06       7.27 f
+  U576/Y (AO222X1_RVT)                                    0.10       7.37 f
+  U704/Y (INVX1_RVT)                                      0.05       7.42 r
+  U575/Y (OR2X1_RVT)                                      0.06       7.48 r
+  U758/Y (NAND2X0_RVT)                                    0.10       7.59 f
+  U548/Y (OA22X1_RVT)                                     0.14       7.73 f
+  U706/Y (OAI221X1_RVT)                                   0.11       7.84 r
+  U547/Y (AO221X1_RVT)                                    0.07       7.91 r
+  U432/Y (NOR3X0_RVT)                                     0.10       8.01 f
+  U431/Y (NAND4X0_RVT)                                    0.05       8.06 r
+  U430/Y (NAND4X0_RVT)                                    0.06       8.12 f
+  U426/Y (NAND2X0_RVT)                                    0.05       8.17 r
+  too_fast (out)                                          0.00       8.17 r
+  data arrival time                                                  8.17
+
+  clock clk (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.00      20.00
+  output external delay                                  -0.75      19.25
+  data required time                                                19.25
+  --------------------------------------------------------------------------
+  data required time                                                19.25
+  data arrival time                                                 -8.17
+  --------------------------------------------------------------------------
+  slack (MET)                                                       11.08
+
+
+1

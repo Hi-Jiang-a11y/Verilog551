@@ -1,0 +1,61 @@
+# Top-level design and target standard-cell library.
+set TOP balance_cntrl
+set LIB saed32rvt_tt0p85v25c
+
+# Search the current directory and configure synthesis libraries.
+set_app_var search_path [concat $search_path .]
+set_app_var target_library [list ${LIB}.db]
+set_app_var link_library [list * ${LIB}.db]
+
+# Read RTL sources from the current directory.
+read_file -format sverilog [list \
+    ./PID.sv \
+    ./SegwayMath.sv \
+    ./balance_cntrl.sv]
+# Link the top-level RTL design.
+current_design $TOP
+link
+
+# Define the clock and preserve its clock network during synthesis.
+create_clock -name "clk" -period 8 -waveform { 0 4 } { clk }
+set_dont_touch_network [find port clk]
+
+# Collect all primary inputs except the clock.
+set prim_inputs [remove_from_collection [all_inputs] [find port clk]]
+
+# Apply input delay and model the external input drivers.
+set_input_delay -clock clk 0.3 [copy_collection $prim_inputs]
+set driven_inputs [remove_from_collection $prim_inputs [find port rst_n]]
+set_driving_cell -lib_cell NAND2X2_RVT -library $LIB \
+    [copy_collection $driven_inputs]
+
+# Apply reset drive strength separately.
+set_drive 0.1 rst_n
+
+# Apply output timing and load constraints.
+set_output_delay -clock clk 0.75 [all_outputs]
+set_load 0.05 [all_outputs]
+
+# Set wire-load and transition constraints.
+set_wire_load_model -name 16000 -library $LIB
+
+set_max_transition 0.15 [current_design]
+
+# Synthesize in two passes and check the design after each pass.
+compile -map_effort low
+check_design
+
+# Flatten hierarchy before the higher-effort optimization pass.
+ungroup -all -flatten
+compile -map_effort medium
+check_design
+
+# Write area and minimum/maximum timing reports.
+report_area > area.rpt
+report_timing -path full -delay max -nworst 3 > timing_max.rpt
+report_timing -path full -delay min -nworst 3 > timing_min.rpt
+
+# Export the synthesized gate-level Verilog netlist.
+write -format verilog $TOP -output balance_cntrl.vg
+
+quit
