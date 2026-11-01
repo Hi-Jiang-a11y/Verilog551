@@ -70,29 +70,52 @@ module Auth_blk_tb;
         check_power(1'b0, "reset holds disabled");
         rst_n = 1'b1;
 
+        // OFF ignores S and unrelated bytes, but remains able to accept G.
         send_byte(8'h53);
-        check_power(1'b0, "S while disabled is ignored");
+        check_power(1'b0, "S while off is ignored");
         send_byte(8'h41);
-        check_power(1'b0, "unrecognized character is ignored");
+        check_power(1'b0, "invalid byte while off is ignored");
 
+        // G authorizes the rider. A repeated G is harmless.
         send_byte(8'h47);
-        check_power(1'b1, "G enables authentication block");
+        check_power(1'b1, "G changes OFF to ON");
         send_byte(8'h47);
-        check_power(1'b1, "G while enabled leaves block enabled");
+        check_power(1'b1, "repeated G while ON is harmless");
 
+        // Disconnect while the rider is present enters STANDBY and keeps
+        // power on. A second S does not change that state.
         rider_off = 1'b0;
         send_byte(8'h53);
-        check_power(1'b1, "S with rider present keeps power on");
+        check_power(1'b1, "S with rider present enters standby");
+        send_byte(8'h53);
+        check_power(1'b1, "S in standby keeps power on");
 
+        // Rider leaving later shuts down without another UART byte.
         rider_off = 1'b1;
-        send_byte(8'h53);
-        check_power(1'b0, "S with rider off disables block");
-        send_byte(8'h53);
-        check_power(1'b0, "S after shutdown remains disabled");
+        check_power(1'b0, "rider leaving standby shuts down");
 
+        // G is accepted again from OFF, even if rider_off is high.
+        send_byte(8'h47);
+        check_power(1'b1, "G re-authorizes after standby shutdown");
+
+        // In ON, rider_off alone must not shut down; S is required.
+        rider_off = 1'b1;
+        check_power(1'b1, "rider_off alone does not shut down ON");
+        send_byte(8'h53);
+        check_power(1'b0, "S with rider off changes ON to OFF");
+
+        // Verify the STANDBY-to-ON arc and distinguish it from ON.
         rider_off = 1'b0;
         send_byte(8'h47);
-        check_power(1'b1, "a new G re-enables block");
+        check_power(1'b1, "G starts a second ON session");
+        send_byte(8'h53);
+        check_power(1'b1, "second disconnect enters standby");
+        send_byte(8'h47);
+        check_power(1'b1, "G from standby returns to ON");
+        rider_off = 1'b1;
+        check_power(1'b1, "rider_off alone still leaves ON powered");
+        send_byte(8'h53);
+        check_power(1'b0, "final S with rider off powers down");
 
         if (errors == 0)
             $display("\nAUTH_BLK TEST PASSED");

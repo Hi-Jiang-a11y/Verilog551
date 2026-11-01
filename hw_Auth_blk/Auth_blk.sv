@@ -17,37 +17,47 @@ module Auth_blk (
         .rdy(rx_rdy)
     );
 
-    typedef enum logic {
-        ENABLE, DISABLE
+    typedef enum logic [1:0] {
+        OFF,
+        ON,
+        STANDBY
     } state_t;
 
     state_t cs, ns;
 
     always_ff @(posedge clk) begin
         if (!rst_n)
-            cs <= DISABLE;
+            cs <= OFF;
         else
             cs <= ns;
     end
 
     always_comb begin
         ns = cs;
-        clr_rx_rdy = 0;
+        clr_rx_rdy = rx_rdy;
         case (cs)
-            DISABLE: begin
-                if (rx_rdy & (rx_data == 8'h47)) begin
-                    clr_rx_rdy = 1;
-                    ns = ENABLE;
-                end
-            end ENABLE: begin
-                if (rx_rdy & (rx_data == 8'h53) & rider_off) begin
-                    clr_rx_rdy = 1;
-                    ns = DISABLE;
+            OFF: begin
+                if (rx_rdy && (rx_data == 8'h47))
+                    ns = ON;
+            end
+            ON: begin
+                if (rx_rdy && (rx_data == 8'h53)) begin
+                    if (rider_off)
+                        ns = OFF;
+                    else
+                        ns = STANDBY;
                 end
             end
+            STANDBY: begin
+                if (rider_off)
+                    ns = OFF;
+                else if (rx_rdy && (rx_data == 8'h47))
+                    ns = ON;
+            end
+            default: ns = OFF;
         endcase
     end
 
-    assign pwr_up = (cs == ENABLE);
+    assign pwr_up = (cs != OFF);
 
 endmodule
