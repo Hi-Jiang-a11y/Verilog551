@@ -1,4 +1,6 @@
-module synch_detect (
+// Alternate gate-level implementation.  Keep a distinct name so that this
+// file can coexist with synch_detect.sv in wildcard/project compilations.
+module synch_detect_alt (
     input  asynch_sig_in,
     input  clk,
     input  rst_n,

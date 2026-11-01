@@ -50,7 +50,7 @@ always begin
     $stop();
   end
   $display("YAHOO!! all tests passed!\n");
-  $stop();
+    $stop();
 end
 
 always

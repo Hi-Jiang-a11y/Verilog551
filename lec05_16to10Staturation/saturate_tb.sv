@@ -7,7 +7,7 @@ logic [9:0]  signed_err_sat;
 logic [9:0]  signed_D_diff;
 logic [6:0]  signed_D_diff_sat;
 
-DUT dut(
+saturate dut(
     .unsigned_err(unsigned_err),
     .unsigned_err_sat(unsigned_err_sat),
     .signed_err(signed_err),

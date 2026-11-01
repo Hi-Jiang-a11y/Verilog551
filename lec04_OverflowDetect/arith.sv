@@ -11,7 +11,10 @@ module arith(A,B,SUB,SUM,OV);
     assign B_comp = (SUB) ? ~B : B;     // 1's complement if subtracting
     assign SUM = A + B_comp + SUB;      // if subtracting we are inverting and adding 1
     assign both_pos = ~A[7] & ~B_comp[7];
-    assign both_neg = A[7] & (B_comp[7]+SUB);
+    // B_comp is the actual second operand after the optional inversion.
+    // The carry-in used for subtraction does not change its sign, so use
+    // B_comp[7] directly when determining whether both operands are negative.
+    assign both_neg = A[7] & B_comp[7];
     assign OV = both_pos & SUM[7] | both_neg & ~SUM[7];
 
 endmodule

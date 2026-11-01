@@ -12,6 +12,8 @@ module balance_cntrl_chk_tb ();
 
     logic [48:0] stim_mem [0:NUM_VECTORS-1];
     logic [24:0] resp_mem [0:NUM_VECTORS-1];
+    integer vec;
+    integer errors;
 
     assign integrator = 18'h00000;
 
@@ -49,9 +51,6 @@ module balance_cntrl_chk_tb ();
         steer_pot = 12'h000;
         errors = 0;
 
-        integer vec;
-        integer errors;
-
         for (vec = 0; vec < NUM_VECTORS; vec = vec + 1) begin
             rst_n = stim_mem[vec][48];
             vld = stim_mem[vec][47];
@@ -72,7 +71,7 @@ module balance_cntrl_chk_tb ();
         end
 
         if (errors == 0)
-            $display("PASS!", NUM_VECTORS);
+            $display("PASS: %0d vectors", NUM_VECTORS);
         else
             $display("FAIL: %0d of %0d", errors, NUM_VECTORS);
         $finish;
