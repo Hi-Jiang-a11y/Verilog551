@@ -1,0 +1,87 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : mult_accum_gated
+Version: Y-2026.03
+Date   : Mon Nov  2 12:35:27 2026
+****************************************
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: A[1] (input port clocked by clk)
+  Endpoint: prod_reg_reg[31]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  mult_accum_gated   16000                 saed32rvt_tt0p85v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  input external delay                     0.75       0.75 f
+  A[1] (in)                                0.05       0.80 f
+  U487/Y (NAND2X0_RVT)                     0.10       0.90 r
+  U818/Y (XNOR2X1_RVT)                     0.14       1.04 r
+  mult_32/S2_2_11/S (FADDX1_RVT)           0.16       1.21 f
+  mult_32/S2_3_10/S (FADDX1_RVT)           0.17       1.38 r
+  mult_32/S2_4_9/S (FADDX1_RVT)            0.16       1.54 f
+  mult_32/S2_5_8/S (FADDX1_RVT)            0.17       1.71 r
+  mult_32/S2_6_7/CO (FADDX1_RVT)           0.12       1.83 r
+  mult_32/S2_7_7/CO (FADDX1_RVT)           0.14       1.97 r
+  U822/Y (XOR3X2_RVT)                      0.18       2.15 f
+  mult_32/S2_9_6/S (FADDX1_RVT)            0.17       2.32 r
+  mult_32/S2_10_5/CO (FADDX1_RVT)          0.12       2.44 r
+  mult_32/S2_11_5/CO (FADDX1_RVT)          0.14       2.58 r
+  U859/Y (XOR2X2_RVT)                      0.13       2.71 f
+  U903/Y (XOR2X2_RVT)                      0.13       2.83 r
+  U850/Y (XOR3X2_RVT)                      0.09       2.93 f
+  U899/Y (NAND2X0_RVT)                     0.06       2.99 r
+  U898/Y (NAND3X0_RVT)                     0.08       3.07 f
+  U901/Y (XOR3X2_RVT)                      0.19       3.26 r
+  U854/Y (XOR2X2_RVT)                      0.13       3.39 f
+  U851/Y (NOR2X0_RVT)                      0.09       3.48 r
+  U583/Y (OA21X1_RVT)                      0.09       3.56 r
+  U582/Y (OR2X1_RVT)                       0.07       3.63 r
+  U581/Y (AO22X1_RVT)                      0.07       3.70 r
+  U574/Y (AO21X1_RVT)                      0.06       3.76 r
+  U573/Y (AND2X1_RVT)                      0.06       3.82 r
+  U569/Y (AO21X1_RVT)                      0.05       3.87 r
+  U568/Y (AND2X1_RVT)                      0.06       3.93 r
+  U564/Y (AO21X1_RVT)                      0.06       3.99 r
+  U863/Y (NAND2X0_RVT)                     0.04       4.03 f
+  U562/Y (NAND2X0_RVT)                     0.06       4.08 r
+  U557/Y (AO22X1_RVT)                      0.09       4.17 r
+  U885/Y (NAND2X0_RVT)                     0.04       4.21 f
+  U547/Y (AO21X1_RVT)                      0.09       4.31 f
+  U546/Y (NAND2X0_RVT)                     0.05       4.36 r
+  U541/Y (AO22X1_RVT)                      0.08       4.44 r
+  U879/Y (NAND2X0_RVT)                     0.04       4.48 f
+  U532/Y (AO21X1_RVT)                      0.09       4.57 f
+  U530/Y (AOI21X1_RVT)                     0.12       4.69 r
+  U875/Y (OR2X1_RVT)                       0.07       4.76 r
+  U523/Y (OA21X1_RVT)                      0.07       4.83 r
+  U89/Y (XOR2X2_RVT)                       0.12       4.95 f
+  prod_reg_reg[31]/D (DFFX1_RVT)           0.01       4.96 f
+  data arrival time                                   4.96
+
+  clock clk (rise edge)                    5.00       5.00
+  clock network delay (ideal)              0.00       5.00
+  prod_reg_reg[31]/CLK (DFFX1_RVT)         0.00       5.00 r
+  library setup time                      -0.05       4.95
+  data required time                                  4.95
+  -----------------------------------------------------------
+  data required time                                  4.95
+  data arrival time                                  -4.96
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -0.01
+
+
+1

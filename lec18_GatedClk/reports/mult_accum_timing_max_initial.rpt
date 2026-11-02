@@ -1,0 +1,89 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : mult_accum
+Version: Y-2026.03
+Date   : Mon Nov  2 12:34:57 2026
+****************************************
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: B[14] (input port clocked by clk)
+  Endpoint: prod_reg_reg[31]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  mult_accum         16000                 saed32rvt_tt0p85v25c
+  mult_accum_DW02_mult_0
+                     8000                  saed32rvt_tt0p85v25c
+  mult_accum_DW01_add_1
+                     8000                  saed32rvt_tt0p85v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    0.75       0.75 f
+  B[14] (in)                                              0.05       0.80 f
+  mult_15/B[14] (mult_accum_DW02_mult_0)                  0.00       0.80 f
+  mult_15/U23/Y (AND2X1_RVT)                              0.11       0.91 f
+  mult_15/U3/Y (XOR3X2_RVT)                               0.18       1.10 f
+  mult_15/S2_2_13/S (FADDX1_RVT)                          0.18       1.27 r
+  mult_15/S2_3_12/S (FADDX1_RVT)                          0.17       1.44 f
+  mult_15/S2_4_11/S (FADDX1_RVT)                          0.17       1.62 r
+  mult_15/S2_5_10/S (FADDX1_RVT)                          0.17       1.78 f
+  mult_15/S2_6_9/S (FADDX1_RVT)                           0.17       1.96 r
+  mult_15/S2_7_8/S (FADDX1_RVT)                           0.17       2.13 f
+  mult_15/S2_8_7/S (FADDX1_RVT)                           0.17       2.30 r
+  mult_15/S2_9_6/CO (FADDX1_RVT)                          0.12       2.42 r
+  mult_15/S2_10_6/S (FADDX1_RVT)                          0.18       2.61 f
+  mult_15/S2_11_5/S (FADDX1_RVT)                          0.17       2.78 r
+  mult_15/S2_12_4/S (FADDX1_RVT)                          0.17       2.95 f
+  mult_15/S2_13_3/S (FADDX1_RVT)                          0.17       3.12 r
+  mult_15/S2_14_2/CO (FADDX1_RVT)                         0.12       3.25 r
+  mult_15/S4_2/S (FADDX1_RVT)                             0.18       3.43 f
+  mult_15/S14_17/S (FADDX1_RVT)                           0.17       3.60 r
+  mult_15/FS_1/A[15] (mult_accum_DW01_add_1)              0.00       3.60 r
+  mult_15/FS_1/U16/Y (NAND2X0_RVT)                        0.05       3.65 f
+  mult_15/FS_1/U15/Y (AO22X1_RVT)                         0.08       3.74 f
+  mult_15/FS_1/U19/Y (OA21X1_RVT)                         0.08       3.81 f
+  mult_15/FS_1/U17/Y (OA21X1_RVT)                         0.08       3.89 f
+  mult_15/FS_1/U25/Y (OA21X1_RVT)                         0.07       3.96 f
+  mult_15/FS_1/U23/Y (OA21X1_RVT)                         0.07       4.04 f
+  mult_15/FS_1/U21/Y (OA21X1_RVT)                         0.07       4.11 f
+  mult_15/FS_1/U32/Y (OA21X1_RVT)                         0.08       4.19 f
+  mult_15/FS_1/U41/Y (OA21X1_RVT)                         0.07       4.26 f
+  mult_15/FS_1/U40/Y (OA21X1_RVT)                         0.08       4.34 f
+  mult_15/FS_1/U34/Y (OA21X1_RVT)                         0.08       4.42 f
+  mult_15/FS_1/U33/Y (OA21X1_RVT)                         0.09       4.51 f
+  mult_15/FS_1/U37/Y (OA21X1_RVT)                         0.08       4.59 f
+  mult_15/FS_1/U55/Y (AND2X1_RVT)                         0.06       4.66 f
+  mult_15/FS_1/U53/Y (OAI22X1_RVT)                        0.10       4.75 r
+  mult_15/FS_1/U51/Y (NAND2X0_RVT)                        0.04       4.79 f
+  mult_15/FS_1/U50/Y (NAND2X0_RVT)                        0.05       4.84 r
+  mult_15/FS_1/SUM[29] (mult_accum_DW01_add_1)            0.00       4.84 r
+  mult_15/PRODUCT[31] (mult_accum_DW02_mult_0)            0.00       4.84 r
+  U106/Y (MUX21X2_RVT)                                    0.09       4.93 r
+  prod_reg_reg[31]/D (DFFX1_RVT)                          0.01       4.94 r
+  data arrival time                                                  4.94
+
+  clock clk (rise edge)                                   5.00       5.00
+  clock network delay (ideal)                             0.00       5.00
+  prod_reg_reg[31]/CLK (DFFX1_RVT)                        0.00       5.00 r
+  library setup time                                     -0.05       4.95
+  data required time                                                 4.95
+  --------------------------------------------------------------------------
+  data required time                                                 4.95
+  data arrival time                                                 -4.94
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.01
+
+
+1

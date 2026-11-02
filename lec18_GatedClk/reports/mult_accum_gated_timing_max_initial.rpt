@@ -1,0 +1,87 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : mult_accum_gated
+Version: Y-2026.03
+Date   : Mon Nov  2 12:35:24 2026
+****************************************
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: B[15] (input port clocked by clk)
+  Endpoint: prod_reg_reg[31]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  mult_accum_gated   16000                 saed32rvt_tt0p85v25c
+  mult_accum_gated_DW02_mult_0
+                     8000                  saed32rvt_tt0p85v25c
+  mult_accum_gated_DW01_add_1
+                     8000                  saed32rvt_tt0p85v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    0.75       0.75 r
+  B[15] (in)                                              0.05       0.80 r
+  mult_32/B[15] (mult_accum_gated_DW02_mult_0)            0.00       0.80 r
+  mult_32/U327/Y (AND2X1_RVT)                             0.10       0.90 r
+  mult_32/S0_14/CO (FADDX1_RVT)                           0.14       1.05 r
+  mult_32/S3_2_14/S (FADDX1_RVT)                          0.18       1.23 f
+  mult_32/S2_3_13/S (FADDX1_RVT)                          0.17       1.40 r
+  mult_32/S2_4_12/S (FADDX1_RVT)                          0.17       1.57 f
+  mult_32/S2_5_11/S (FADDX1_RVT)                          0.17       1.75 r
+  mult_32/S2_6_10/S (FADDX1_RVT)                          0.17       1.91 f
+  mult_32/S2_7_9/S (FADDX1_RVT)                           0.17       2.09 r
+  mult_32/S2_8_8/S (FADDX1_RVT)                           0.17       2.25 f
+  mult_32/S2_9_7/S (FADDX1_RVT)                           0.17       2.43 r
+  mult_32/S2_10_6/S (FADDX1_RVT)                          0.17       2.60 f
+  mult_32/S2_11_5/S (FADDX1_RVT)                          0.17       2.77 r
+  mult_32/S2_12_4/S (FADDX1_RVT)                          0.17       2.94 f
+  mult_32/S2_13_3/S (FADDX1_RVT)                          0.17       3.11 r
+  mult_32/S2_14_2/CO (FADDX1_RVT)                         0.12       3.24 r
+  mult_32/S4_2/S (FADDX1_RVT)                             0.18       3.42 f
+  mult_32/S14_17/S (FADDX1_RVT)                           0.18       3.60 r
+  mult_32/FS_1/A[15] (mult_accum_gated_DW01_add_1)        0.00       3.60 r
+  mult_32/FS_1/U22/Y (NAND2X0_RVT)                        0.06       3.66 f
+  mult_32/FS_1/U97/Y (OA21X1_RVT)                         0.10       3.75 f
+  mult_32/FS_1/U92/Y (OA21X1_RVT)                         0.08       3.83 f
+  mult_32/FS_1/U87/Y (OA21X1_RVT)                         0.08       3.92 f
+  mult_32/FS_1/U82/Y (OA21X1_RVT)                         0.08       4.00 f
+  mult_32/FS_1/U77/Y (OA21X1_RVT)                         0.09       4.09 f
+  mult_32/FS_1/U72/Y (OA21X1_RVT)                         0.08       4.17 f
+  mult_32/FS_1/U67/Y (OA21X1_RVT)                         0.08       4.25 f
+  mult_32/FS_1/U62/Y (OA21X1_RVT)                         0.10       4.35 f
+  mult_32/FS_1/U57/Y (OA21X1_RVT)                         0.08       4.43 f
+  mult_32/FS_1/U52/Y (OA21X1_RVT)                         0.08       4.51 f
+  mult_32/FS_1/U47/Y (OA21X1_RVT)                         0.09       4.59 f
+  mult_32/FS_1/U45/Y (OA21X1_RVT)                         0.09       4.68 f
+  mult_32/FS_1/U43/Y (AND2X1_RVT)                         0.06       4.74 f
+  mult_32/FS_1/U42/Y (OA22X1_RVT)                         0.08       4.83 f
+  mult_32/FS_1/U5/Y (XOR2X2_RVT)                          0.12       4.94 r
+  mult_32/FS_1/SUM[29] (mult_accum_gated_DW01_add_1)      0.00       4.94 r
+  mult_32/PRODUCT[31] (mult_accum_gated_DW02_mult_0)      0.00       4.94 r
+  prod_reg_reg[31]/D (DFFX1_RVT)                          0.01       4.95 r
+  data arrival time                                                  4.95
+
+  clock clk (rise edge)                                   5.00       5.00
+  clock network delay (ideal)                             0.00       5.00
+  prod_reg_reg[31]/CLK (DFFX1_RVT)                        0.00       5.00 r
+  library setup time                                     -0.05       4.95
+  data required time                                                 4.95
+  --------------------------------------------------------------------------
+  data required time                                                 4.95
+  data arrival time                                                 -4.95
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -0.01
+
+
+1

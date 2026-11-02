@@ -1,0 +1,59 @@
+read_file -format sverilog mult_accum_gated.sv
+
+# Keep all DC output reports together so the ungated and gated designs can
+# be compared directly after both scripts are run.
+set report_dir reports
+file mkdir $report_dir
+
+###################################
+# Set Current Design to top level #
+###################################
+current_design mult_accum_gated
+
+create_clock -name "clk" -period 5 -waveform { 0 2.3 } { clk }
+set_dont_touch_network [find port clk]
+
+set prim_inputs [remove_from_collection [all_input] [find port clk]]
+set_input_delay -clock clk 0.75 $prim_inputs
+set_driving_cell -lib_cell NAND2X1_RVT -library saed32rvt_tt0p85v25c [copy_collection $prim_inputs]
+
+set_switching_activity -static_probability 0.5 -toggle_rate 0.25 -base_clock clk [copy_collection $prim_inputs]
+set_switching_activity -static_probability 0.1 -toggle_rate 0.1 -base_clock clk [find port en]
+
+set_max_transition 0.10 [current_design]
+set_output_delay -clock clk 0.75 [all_outputs]
+set_load 0.05 [all_outputs]
+set_wire_load_model -name 16000 -library saed32rvt_tt0p85v25c
+
+compile -map_effort medium
+redirect -file [file join $report_dir mult_accum_gated_check_initial.rpt] {
+  check_design
+}
+redirect -file [file join $report_dir mult_accum_gated_area_initial.rpt] {
+  report_area
+}
+redirect -file [file join $report_dir mult_accum_gated_timing_max_initial.rpt] {
+  report_timing -path full -delay max
+}
+redirect -file [file join $report_dir mult_accum_gated_timing_min_initial.rpt] {
+  report_timing -path full -delay min
+}
+
+ungroup -all -flatten
+set_fix_hold clk
+compile -map_effort medium
+redirect -file [file join $report_dir mult_accum_gated_check_final.rpt] {
+  check_design
+}
+redirect -file [file join $report_dir mult_accum_gated_area_final.rpt] {
+  report_area
+}
+redirect -file [file join $report_dir mult_accum_gated_timing_max_final.rpt] {
+  report_timing -path full -delay max
+}
+redirect -file [file join $report_dir mult_accum_gated_timing_min_final.rpt] {
+  report_timing -path full -delay min
+}
+redirect -file [file join $report_dir mult_accum_gated_power_final.rpt] {
+  report_power
+}

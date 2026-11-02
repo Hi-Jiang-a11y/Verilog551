@@ -1,0 +1,98 @@
+read_file -format sverilog mult_accum.sv  
+
+# Keep all DC output reports together so the ungated and gated designs can
+# be compared directly after both scripts are run.
+set report_dir reports
+file mkdir $report_dir
+
+###################################
+# Set Current Design to top level #
+###################################
+current_design mult_accum
+
+###########################################
+# Define clock and set don't mess with it #
+###########################################
+create_clock -name "clk" -period 5 -waveform { 0 2.3 }  { clk  }
+set_dont_touch_network [find port clk]
+
+# setup pointer that contains all inputs except clock #
+set prim_inputs [remove_from_collection [all_input] [find port clk]]
+
+#########################################
+# Set input delay & drive on all inputs #
+#########################################
+set_input_delay -clock clk 0.75 $prim_inputs 
+set_driving_cell -lib_cell NAND2X1_RVT  -library saed32rvt_tt0p85v25c [copy_collection $prim_inputs]
+
+##########################################################
+# Setting activity factor of inputs for power estimation #
+##########################################################
+set_switching_activity -static_probability 0.5 -toggle_rate 0.25 -base_clock clk [copy_collection $prim_inputs]
+set_switching_activity -static_probability 0.1 -toggle_rate 0.1 -base_clock clk [find port en]
+
+############################################################
+# Set max transition time is important for Hot-E reasons #
+######################################################
+set_max_transition 0.10 [current_design]
+
+##########################################
+# Set output delay & load on all outputs #
+##########################################
+set_output_delay -clock clk 0.75 [all_outputs]
+set_load 0.05 [all_outputs]
+
+#############################################################
+# Wire load model allows it to estimate internal parasitics #
+#############################################################
+set_wire_load_model -name 16000 -library saed32rvt_tt0p85v25c 
+
+########################################
+# Now actually synthesize for 1st time #
+########################################
+compile -map_effort medium
+
+#propagate_switching_activity
+
+redirect -file [file join $report_dir mult_accum_check_initial.rpt] {
+  check_design
+}
+## design ware components cause extra pins
+
+redirect -file [file join $report_dir mult_accum_area_initial.rpt] {
+  report_area
+}
+redirect -file [file join $report_dir mult_accum_timing_max_initial.rpt] {
+  report_timing -path full -delay max
+}
+redirect -file [file join $report_dir mult_accum_timing_min_initial.rpt] {
+  report_timing -path full -delay min
+}
+
+## smash the hierarchy (design ware component)
+ungroup -all -flatten
+
+set_fix_hold clk
+
+compile -map_effort medium
+
+redirect -file [file join $report_dir mult_accum_check_final.rpt] {
+  check_design
+}
+
+redirect -file [file join $report_dir mult_accum_area_final.rpt] {
+  report_area
+}
+redirect -file [file join $report_dir mult_accum_timing_max_final.rpt] {
+  report_timing -path full -delay max
+}
+redirect -file [file join $report_dir mult_accum_timing_min_final.rpt] {
+  report_timing -path full -delay min
+}
+
+#########################
+# Report power analysis #
+#########################
+redirect -file [file join $report_dir mult_accum_power_final.rpt] {
+  report_power
+}

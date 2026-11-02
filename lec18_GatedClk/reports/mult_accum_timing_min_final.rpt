@@ -1,0 +1,48 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay min
+        -max_paths 1
+Design : mult_accum
+Version: Y-2026.03
+Date   : Mon Nov  2 12:35:00 2026
+****************************************
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: prod_reg_reg[4]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: prod_reg_reg[4]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  mult_accum         16000                 saed32rvt_tt0p85v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  prod_reg_reg[4]/CLK (DFFX1_RVT)          0.00       0.00 r
+  prod_reg_reg[4]/Q (DFFX1_RVT)            0.13       0.13 f
+  U620/Y (AO22X1_RVT)                      0.06       0.19 f
+  prod_reg_reg[4]/D (DFFX1_RVT)            0.01       0.20 f
+  data arrival time                                   0.20
+
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  prod_reg_reg[4]/CLK (DFFX1_RVT)          0.00       0.00 r
+  library hold time                       -0.02      -0.02
+  data required time                                 -0.02
+  -----------------------------------------------------------
+  data required time                                 -0.02
+  data arrival time                                  -0.20
+  -----------------------------------------------------------
+  slack (MET)                                         0.22
+
+
+1

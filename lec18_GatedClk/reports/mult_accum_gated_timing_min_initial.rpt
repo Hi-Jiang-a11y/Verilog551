@@ -1,0 +1,48 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay min
+        -max_paths 1
+Design : mult_accum_gated
+Version: Y-2026.03
+Date   : Mon Nov  2 12:35:24 2026
+****************************************
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: en_stg2_reg
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: accum_en_lat_reg
+            (positive level-sensitive latch clocked by clk')
+  Path Group: clk
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  mult_accum_gated   16000                 saed32rvt_tt0p85v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    5.00       5.00
+  clock network delay (ideal)              0.00       5.00
+  en_stg2_reg/CLK (DFFX1_RVT)              0.00       5.00 r
+  en_stg2_reg/Q (DFFX1_RVT)                0.12       5.12 r
+  U8/Y (OR2X1_RVT)                         0.05       5.18 r
+  accum_en_lat_reg/D (LATCHX1_RVT)         0.01       5.19 r
+  data arrival time                                   5.19
+
+  clock clk' (fall edge)                   5.00       5.00
+  clock network delay (ideal)              0.00       5.00
+  accum_en_lat_reg/CLK (LATCHX1_RVT)       0.00       5.00 f
+  library hold time                       -0.04       4.96
+  data required time                                  4.96
+  -----------------------------------------------------------
+  data required time                                  4.96
+  data arrival time                                  -5.19
+  -----------------------------------------------------------
+  slack (MET)                                         0.23
+
+
+1
