@@ -8,6 +8,7 @@ transcript
 *.vstf
 
 # Simulation waveform / dump files
+*vvp
 *.vcd
 
 # Quartus-generated files that may accompany simulations
