@@ -1,5 +1,6 @@
 # ModelSim / QuestaSim generated files
 work/
+
 transcript
 *.wlf
 *.mpf
@@ -10,13 +11,31 @@ transcript
 *.vcd
 
 # Quartus-generated files that may accompany simulations
+db/
+incremental_db/
+
 *.qws
 *.qdb
 *.qpg
 *.qtl
-*.qsf
-*.qpf
 *_assignment_defaults.qdf
+*.asm.rpt
+*.done
+*.fit.rpt
+*.fit.smsg
+*.fit.summary
+*.flow.rpt
+*.jdi
+*.map.rpt
+*.map.smsg
+*.map.summary
+*.pin
+*.qws
+*.sdc
+*.sld
+*.sof
+*.sta.rpt
+*.sta.summary
 
 # drawio files
 *.drawio.bkp

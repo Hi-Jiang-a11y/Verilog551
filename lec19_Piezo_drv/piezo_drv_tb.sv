@@ -84,9 +84,12 @@ module piezo_drv_tb;
         rst_n = 1'b1;
         check_state(S_WAIT, 1);
 
-        // batt_low plays the three-note reverse sequence E7 -> C7 -> G6.
+        // batt_low plays the complete reverse Charge! sequence.
         batt_low = 1'b1;
-        check_state(S_E7, 10);
+        check_state(S_G7_LONG, 10);
+        check_state(S_E7_SHORT, 300_000);
+        check_state(S_G7, 100_000);
+        check_state(S_E7, 200_000);
         check_state(S_C7, 200_000);
         check_state(S_G6, 200_000);
         check_state(S_WAIT, 200_000);

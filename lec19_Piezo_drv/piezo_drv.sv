@@ -7,20 +7,21 @@ module piezo_drv #(
 );
     typedef enum logic [2:0] { WAIT, G6, C7, E7, G7, E7_SHORT, G7_LONG } state_t;
 
-    localparam int unsigned REPEAT_TICKS = FAST_SIM ? 2_343_750 : 150_000_000;
-    localparam int unsigned DUR_23 = FAST_SIM ? 131_072 : 8_388_608;
-    localparam int unsigned DUR_22 = FAST_SIM ? 65_536 : 4_194_304;
-    localparam int unsigned DUR_23_PLUS_22 = FAST_SIM ? 196_608 : 12_582_912;
-    localparam int unsigned DUR_24 = FAST_SIM ? 262_144 : 16_777_216;
-    localparam int unsigned HALF_G6 = FAST_SIM ? 249 : 15_944;
-    localparam int unsigned HALF_C7 = FAST_SIM ? 187 : 11_945;
-    localparam int unsigned HALF_E7 = FAST_SIM ? 148 : 9_481;
-    localparam int unsigned HALF_G7 = FAST_SIM ? 124 : 7_972;
+    localparam logic [27:0] REPEAT_TICKS = FAST_SIM ? 28'd2_343_750 : 28'd150_000_000;
+    localparam logic [24:0] DUR_23 = FAST_SIM ? 25'd131_072 : 25'd8_388_608;
+    localparam logic [24:0] DUR_22 = FAST_SIM ? 25'd65_536 : 25'd4_194_304;
+    localparam logic [24:0] DUR_23_PLUS_22 = FAST_SIM ? 25'd196_608 : 25'd12_582_912;
+    localparam logic [24:0] DUR_24 = FAST_SIM ? 25'd262_144 : 25'd16_777_216;
+    // Full periods at 50 MHz. FAST_SIM makes every note 64 times faster.
+    localparam logic [15:0] PERIOD_G6 = FAST_SIM ? 16'd498 : 16'd31_888;
+    localparam logic [15:0] PERIOD_C7 = FAST_SIM ? 16'd373 : 16'd23_889;
+    localparam logic [15:0] PERIOD_E7 = FAST_SIM ? 16'd296 : 16'd18_961;
+    localparam logic [15:0] PERIOD_G7 = FAST_SIM ? 16'd249 : 16'd15_944;
 
     state_t cs, ns;
     logic [27:0] repeat_count;
     logic [24:0] note_count, note_duration;
-    logic [14:0] tone_count, half_period;
+    logic [15:0] tone_count, tone_period;
     logic note_done, repeat_done;
 
     always_ff @(posedge clk or negedge rst_n) begin
@@ -53,7 +54,7 @@ module piezo_drv #(
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n)
             tone_count <= '0;
-        else if (cs == WAIT || tone_count >= half_period - 1'b1)
+        else if (cs == WAIT || tone_count >= tone_period - 1'b1)
             tone_count <= '0;
         else
             tone_count <= tone_count + 1'b1;
@@ -62,20 +63,20 @@ module piezo_drv #(
     always_comb begin
         ns = cs;
         note_duration = DUR_23;
-        half_period = HALF_G6;
+        tone_period = PERIOD_G6;
         case (cs)
             WAIT: begin
                 note_duration = DUR_23;
-                half_period = HALF_G6;
+                tone_period = PERIOD_G6;
                 if (too_fast)
                     ns = G6;
                 else if (batt_low)
-                    ns = E7;
+                    ns = G7_LONG;
                 else if (en_steer && repeat_done)
                     ns = G6;
             end G6: begin
                 note_duration = DUR_23;
-                half_period = HALF_G6;
+                tone_period = PERIOD_G6;
                 if (note_done) begin
                     if (too_fast)
                         ns = C7;
@@ -86,7 +87,7 @@ module piezo_drv #(
                 end
             end C7: begin
                 note_duration = DUR_23;
-                half_period = HALF_C7;
+                tone_period = PERIOD_C7;
                 if (note_done) begin
                     if (too_fast)
                         ns = E7;
@@ -97,7 +98,7 @@ module piezo_drv #(
                 end
             end E7: begin
                 note_duration = DUR_23;
-                half_period = HALF_E7;
+                tone_period = PERIOD_E7;
                 if (note_done) begin
                     if (too_fast)
                         ns = G6;
@@ -108,40 +109,46 @@ module piezo_drv #(
                 end
             end G7: begin
                 note_duration = DUR_23_PLUS_22;
-                half_period = HALF_G7;
+                tone_period = PERIOD_G7;
                 if (note_done) begin
                     if (too_fast)
                         ns = G6;
+                    else if (batt_low)
+                        ns = E7;
                     else
                         ns = E7_SHORT;
                 end
             end E7_SHORT: begin
                 note_duration = DUR_22;
-                half_period = HALF_E7;
+                tone_period = PERIOD_E7;
                 if (note_done) begin
                     if (too_fast)
                         ns = G6;
+                    else if (batt_low)
+                        ns = G7;
                     else
                         ns = G7_LONG;
                 end
             end G7_LONG: begin
                 note_duration = DUR_24;
-                half_period = HALF_G7;
+                tone_period = PERIOD_G7;
                 if (note_done) begin
                     if (too_fast)
                         ns = G6;
+                    else if (batt_low)
+                        ns = E7_SHORT;
                     else
                         ns = WAIT;
                 end
             end default: begin
                 ns = WAIT;
                 note_duration = DUR_23;
-                half_period = HALF_G6;
+                tone_period = PERIOD_G6;
             end
         endcase
     end
 
-    assign piezo = (cs != WAIT) ? (tone_count < half_period / 2) : 1'b0;
+    assign piezo = (cs != WAIT) ? (tone_count < tone_period / 2) : 1'b0;
     assign piezo_n = (cs != WAIT) ? ~piezo : 1'b0;
 
 endmodule
