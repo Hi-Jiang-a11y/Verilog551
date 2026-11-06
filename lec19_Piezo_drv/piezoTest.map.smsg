@@ -1,2 +1,0 @@
-Info (10281): Verilog HDL Declaration information at rst_synch.sv(3): object "RST_n" differs only in case from object "rst_n" in the same scope File: /home/Juliet/proj/ece551/lec19_Piezo_drv/rst_synch.sv Line: 3
-Info (10281): Verilog HDL Declaration information at piezoTest.sv(2): object "RST_n" differs only in case from object "rst_n" in the same scope File: /home/Juliet/proj/ece551/lec19_Piezo_drv/piezoTest.sv Line: 2
