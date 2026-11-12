@@ -34,6 +34,7 @@ module inertial_integrator (
         else if (vld)
             ptch_int <= ptch_int - ptch_rt_comp_ext + fusion_ptch_offset;
     end
+
     assign ptch = ptch_int[26:11];
 
 endmodule
