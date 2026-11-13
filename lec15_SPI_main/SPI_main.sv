@@ -1,5 +1,6 @@
 module SPI_main (
-    input clk, rst_n, wrt,
+    input clk, rst_n,
+    input wrt,
     input [15:0] wrt_data,
     output logic done,
     output logic [15:0] rd_data,
