@@ -24,14 +24,14 @@ module piezo_drv #(
     logic [15:0] tone_count, tone_period;
     logic note_done, repeat_done;
 
-    always_ff @(posedge clk or negedge rst_n) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             cs <= WAIT;
         else
             cs <= ns;
     end
 
-    always_ff @(posedge clk or negedge rst_n) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             repeat_count <= '0;
         else if (cs != WAIT)
@@ -41,7 +41,7 @@ module piezo_drv #(
     end
     assign repeat_done = (repeat_count >= REPEAT_TICKS);
 
-    always_ff @(posedge clk or negedge rst_n) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             note_count <= '0;
         else if (cs == WAIT || note_done)
@@ -51,7 +51,7 @@ module piezo_drv #(
     end
     assign note_done = (cs != WAIT) && (note_count >= note_duration - 1'b1);
 
-    always_ff @(posedge clk or negedge rst_n) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             tone_count <= '0;
         else if (cs == WAIT || tone_count >= tone_period - 1'b1)

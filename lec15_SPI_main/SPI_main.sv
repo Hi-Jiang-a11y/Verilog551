@@ -23,7 +23,7 @@ typedef enum logic [1:0] {
 
 state_t cs, ns;
 
-always_ff @(posedge clk) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n)
         cs <= IDLE;
     else
@@ -73,7 +73,7 @@ always_comb begin
 end
 
 // bit counter
-always_ff @(posedge clk or negedge rst_n) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n)
         bit_cntr <= 4'd0;
     else if (init)
@@ -84,7 +84,7 @@ end
 assign done15 = &bit_cntr;
 
 // SCLK
-always_ff @(posedge clk or negedge rst_n) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n)
         SCLK_div <= 4'b1011;
     else if (ld_SCLK)
@@ -100,14 +100,14 @@ assign shft_imm = (SCLK_div == 4'b1111);
 logic MISO_smpl;
 logic [15:0] shft_reg;
 
-always_ff @(posedge clk or negedge rst_n) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n)
         MISO_smpl <= 1'b0;
     else if (smpl)
         MISO_smpl <= MISO;
 end
 
-always_ff @(posedge clk or negedge rst_n) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n)
         shft_reg <= 16'd0;
     else if (init)
@@ -118,7 +118,7 @@ end
 assign MOSI = shft_reg[15];
 
 // done
-always_ff @(posedge clk or negedge rst_n) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n) begin
         done    <= 1'b0;
         rd_data <= 16'd0;
@@ -131,7 +131,7 @@ always_ff @(posedge clk or negedge rst_n) begin
 end
 
 // SS_n
-always_ff @(posedge clk or negedge rst_n) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n)
         SS_n <= 1'b1;
     else if (init)

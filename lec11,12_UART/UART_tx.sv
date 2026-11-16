@@ -15,7 +15,7 @@ module UART_tx (
     logic shift;
     logic [12:0] baud_cnt;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             cs <= IDLE;
         else
@@ -43,7 +43,7 @@ module UART_tx (
     end
 
     // baud_cnt
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             baud_cnt <= 13'd0;
         else begin
@@ -57,7 +57,7 @@ module UART_tx (
 
     // bitcnt
     logic [3:0] bit_cnt;
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             bit_cnt <= 4'd0;
         else begin
@@ -71,7 +71,7 @@ module UART_tx (
 
     // TX
     logic [9:0] tx_shift_reg;
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             tx_shift_reg <= 10'b1;
         else begin
@@ -84,7 +84,7 @@ module UART_tx (
     // UART line is idle-high, including after the STOP bit.
     assign TX = (cs == IDLE) ? 1'b1 : tx_shift_reg[0];
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             tx_done <= 1'b0;
         else begin

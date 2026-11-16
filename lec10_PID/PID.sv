@@ -10,9 +10,6 @@ module PID (
 
     localparam logic signed [4:0] P_COEFF = 5'h09;
 
-
-
-
 // {{{ D&P term
     logic signed [12:0] D_term;
     assign D_term = -($signed(ptch_rt) >>> 6);
@@ -40,13 +37,13 @@ module PID (
     assign accumulate = ptch_err_sat_signext + I_term_q;
     assign overflow = (ptch_err_sat_signext[17] == I_term_q[17]) && (accumulate[17] != ptch_err_sat_signext[17]);
 
-    always @(*) begin
+    always_comb begin
         if (~overflow & vld)
             I_term_d = rider_off ? 18'h00000 : accumulate;
         else
             I_term_d = rider_off ? 18'h00000 : I_term_q;
     end
-    always @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             I_term_q <= 18'd0;
         else
@@ -56,13 +53,13 @@ module PID (
 
     logic [26:0] long_tmr;
     logic [26:0] long_tmr_d;
-    always @(*) begin
+    always_comb begin
         if (&long_tmr[26:19])
             long_tmr_d = pwr_up ? long_tmr : 27'h0000000 ;
         else
             long_tmr_d = pwr_up ? (long_tmr + 1) : 27'h0000000;
     end
-    always @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             long_tmr <= 27'h0000000;
         else

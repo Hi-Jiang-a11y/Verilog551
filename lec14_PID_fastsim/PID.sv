@@ -37,13 +37,13 @@ module PID #(parameter bit fast_sim = 1'b1) (
     assign accumulate = ptch_err_sat_signext + I_term_q;
     assign overflow = (ptch_err_sat_signext[17] == I_term_q[17]) && (accumulate[17] != ptch_err_sat_signext[17]);
 
-    always @(*) begin
+    always_comb begin
         if (~overflow & vld)
             I_term_d = rider_off ? 18'h00000 : accumulate;
         else
             I_term_d = rider_off ? 18'h00000 : I_term_q;
     end
-    always @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             I_term_q <= 18'd0;
         else
@@ -85,7 +85,7 @@ module PID #(parameter bit fast_sim = 1'b1) (
             long_tmr_d = long_tmr + timer_increment;
         end
     end
-    always @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             long_tmr <= 27'h0000000;
         else

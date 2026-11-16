@@ -6,7 +6,7 @@ module UART_rx (
 
     logic RX_meta, RX_sync, RX_sync_d;
     logic RX_fall;
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n) begin
             RX_meta <= 1'b1;
             RX_sync <= 1'b1;
@@ -27,7 +27,7 @@ module UART_rx (
 
     state_t cs, ns;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             cs <= IDLE;
         else
@@ -57,7 +57,7 @@ module UART_rx (
     // baud_cnt
     logic [12:0] baud_cnt;
     logic shift;
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             baud_cnt <= 13'd5208;
         else begin
@@ -71,7 +71,7 @@ module UART_rx (
 
     // bit_cnt
     logic [3:0] bit_cnt;
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             bit_cnt <= 4'd0;
         else begin
@@ -85,7 +85,7 @@ module UART_rx (
 
     // RX
     logic [8:0] rx_shift_reg;
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             rx_shift_reg <= 9'd0;
         else begin
@@ -96,7 +96,7 @@ module UART_rx (
     assign rx_data = rx_shift_reg[7:0];
 
     // rdy
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
             rdy <= 1'd0;
         else if (clr_rdy | start)

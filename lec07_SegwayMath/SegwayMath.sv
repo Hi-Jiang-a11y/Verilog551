@@ -50,7 +50,7 @@ module SegwayMath (
 
     logic signed [12:0] lft_torque_comp;
     logic signed [12:0] lft_shaped;
-    always_comb @(*) begin
+    always_comb begin
         if (lft_torque[12])
             lft_torque_comp = lft_torque - MIN_DUTY;
         else
