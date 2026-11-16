@@ -1,50 +1,35 @@
-`timescale 1ns/1ps
-
 module PWM11 (
     input clk,
     input rst_n,
     input [10:0] duty,
-    output reg PWM1,
-    output reg PWM2,
+    output logic PWM1,
+    output logic PWM2,
     output PWM_synch,
-    output ovr_I_bank
+    output ovr_I_blank
 );
 
-    localparam NONOVERLAP = 11'h040;
+    localparam logic [10:0] NONOVERLAP = 11'h040;   // Dead time
 
     logic [10:0] cnt;
-    always @(posedge clk or negedge rst_n) begin
+    always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n)
-            cnt <= 1'b0;
+            cnt <= '0;
         else
             cnt <= cnt + 11'd1;
     end
 
-    logic [11:0] dutyaddnonoverlap;
-    assign dutyaddnonoverlap = duty + NONOVERLAP;
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n)
-            PWM2 <= 1'b0;
-        else if (cnt >= dutyaddnonoverlap)
-            PWM2 <= 1'b1;
-        else
-            PWM2 <= 1'b0;
-    end
+    logic [11:0] duty_plus_nonoverlap;
+    assign duty_plus_nonoverlap = duty + NONOVERLAP;
 
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n)
-            PWM1 <= 1'b0;
-        else if ((cnt >= NONOVERLAP) && (cnt <= duty))
-            PWM1 <= 1'b1;
-        else
-            PWM1 <= 1'b0;
-    end
+    assign PWM1 = rst_n && (cnt >= NONOVERLAP) && (cnt < duty);
+    assign PWM2 = rst_n && (cnt >= duty_plus_nonoverlap);
 
+    // Synchronization point
     assign PWM_synch = ~(|cnt);
 
-    assign ovr_I_bank =
+    assign ovr_I_blank =
         ((cnt > NONOVERLAP) && (cnt < NONOVERLAP + 11'd128)) ||
-        ((cnt > dutyaddnonoverlap) &&
-         (cnt < dutyaddnonoverlap + 11'd128));
+        ((cnt > duty_plus_nonoverlap) &&
+         (cnt < duty_plus_nonoverlap + 12'd128));
 
 endmodule

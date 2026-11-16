@@ -60,7 +60,7 @@ module PWM11_test(clk,RST_n,inc,LED);
 	///////////////////////////////////////////
 	// Instantiate PWM11 (which is the DUT) //
 	/////////////////////////////////////////
-	PWM11 iDUT(.clk(clk), .rst_n(rst_n), .duty(duty), .PWM1(PWM1), .PWM2(PWM2),
+    PWM11 iDUT(.clk(clk), .rst_n(rst_n), .duty(duty), .PWM1(PWM1), .PWM2(PWM2),
 	           .PWM_synch(), .ovr_I_blank());
 	
 	/////////////////////////////////////////////////

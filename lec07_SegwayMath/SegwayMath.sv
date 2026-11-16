@@ -15,7 +15,7 @@ module SegwayMath (
 
     logic signed [11:0] PID_ss;
     logic signed [20:0] pid_product;
-    always @(*) begin
+    always_comb begin
         pid_product = $signed(PID_cntrl) *
                       $signed({{1'b0}, ss_tmr});
         PID_ss = pid_product >>> 8;
@@ -26,7 +26,7 @@ module SegwayMath (
     logic signed [15:0] steer_product;
     logic signed [12:0] torque;
     logic signed [12:0] lft_torque, rght_torque;
-    always @(*) begin
+    always_comb begin
         if (steer_pot < 12'h200)
             steer_pot_limited = 12'h200;
         else if (steer_pot > 12'he00)
@@ -50,7 +50,7 @@ module SegwayMath (
 
     logic signed [12:0] lft_torque_comp;
     logic signed [12:0] lft_shaped;
-    always @(*) begin
+    always_comb @(*) begin
         if (lft_torque[12])
             lft_torque_comp = lft_torque - MIN_DUTY;
         else
@@ -66,7 +66,7 @@ module SegwayMath (
 
     logic signed [12:0] rght_torque_comp;
     logic signed [12:0] rght_shaped;
-    always @(*) begin
+    always_comb begin
         if (rght_torque[12])
             rght_torque_comp = rght_torque - MIN_DUTY;
         else
