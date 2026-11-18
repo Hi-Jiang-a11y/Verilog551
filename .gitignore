@@ -8,6 +8,7 @@ transcript
 *.vstf
 
 # Simulation waveform / dump files
+*.out
 *vvp
 *.vcd
 
